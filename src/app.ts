@@ -1,17 +1,23 @@
-import express, { Application, Request, Response } from "express";
-import cors from "cors";
-const app: Application = express();
+import express, { Application, Request, Response } from 'express'
+import cors from 'cors'
+import usersRouter from './app/modules/users/users.route'
+import cardsRouter from './app/modules/cards/cards.routes'
+const app: Application = express()
 
-//cors
-app.use(cors());
+app.use(cors())
 
 //parser
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Application routes
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Working Root Route");
-});
+app.use('/api/v1/users/', usersRouter)
+app.use('/api/v1/cards/', cardsRouter)
 
-export default app;
+//Testing
+app.get('/', async (req: Request, res: Response) => {
+  res.send('Working Successfully')
+})
+
+export default app
