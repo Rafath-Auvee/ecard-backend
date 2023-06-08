@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import usersService from './users.service'
+import { getAllUsers } from './users.service'
 
 const createUser = async (req: Request, res: Response) => {
   try {
@@ -20,4 +21,16 @@ const createUser = async (req: Request, res: Response) => {
 
 export default {
   createUser,
+}
+
+export const getAllUsersController = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const users = await getAllUsers()
+    res.json(users)
+  } catch (error) {
+    res.status(500).json({ error: 'Error to get all users in controller' })
+  }
 }
