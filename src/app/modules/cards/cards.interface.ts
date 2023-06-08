@@ -1,5 +1,7 @@
-export type IUser = {
+export type ICard = {
   id: string
-  password: string
-  role: string
+  title: string
+  description: string
+  price: number
+  cardType: string
 }
